@@ -1,0 +1,181 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+using namespace std;
+
+
+class Rectangle
+{
+private:
+    int w;
+    int h;
+    static int count;//一定要定义和初始化
+public:
+    Rectangle();//无参构造函数
+    Rectangle(int w, int h);//有参构造函数
+    ~Rectangle()
+    {
+        count--;
+    };
+
+
+    void setw1(int w)//修改参数
+    {
+        this->w = w;
+    }
+    void seth1(int h)
+    {
+        this->h = h;
+    }
+
+
+    int getw()//获取值
+    {
+        return w;
+    }
+    int geth()
+    {
+        return h;
+    }
+
+
+    int getA()
+    {
+        return w*h;
+    }
+    int getP()
+    {
+        return (w+h)*2;
+    }
+
+    static void getCount()
+    {
+        cout << count << endl;
+    }
+};
+int Rectangle::count = 0;//不要忘记静态数据成员定义和初始化
+Rectangle::Rectangle()//构造函数里面都要count++，可能调用的不一样
+{
+    this->h = 1;
+    this->w = 1;
+    count++;
+}
+Rectangle::Rectangle(int w, int h)
+{
+    setw1(w);
+    seth1(h);
+    count++;
+}
+
+int main()
+{
+    Rectangle a1;
+    cout << a1.getw() << " " << a1.geth() << " " << a1.getA() << " "<< a1.getP() << endl;
+    Rectangle::getCount();
+    int w = 0;
+    int h = 0;
+    cin >> w >> h;
+    Rectangle a2(w,h);
+    cout << a2.getw() << " " << a2.geth() << " " << a2.getA() << " " << a2.getP() << endl;
+    Rectangle::getCount();
+}
+
+
+
+
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+using namespace std;
+
+
+class Rectangle
+{
+private:
+    int w;
+    int h;
+    static int count;//一定要定义和初始化
+public:
+    Rectangle();//无参构造函数
+    Rectangle(int w, int h);//有参构造函数
+    ~Rectangle()
+    {
+        cout << 999 << endl;
+        count--;
+    };
+
+
+    void setw1(int w)//修改参数
+    {
+        this->w = w;
+    }
+    void seth1(int h)
+    {
+        this->h = h;
+    }
+
+
+    int getw()//获取值
+    {
+        return w;
+    }
+    int geth()
+    {
+        return h;
+    }
+
+
+    int getA()
+    {
+        return w*h;
+    }
+    int getP()
+    {
+        return (w+h)*2;
+    }
+
+    static void getCount()
+    {
+        cout << count << endl;
+    }
+};
+int Rectangle::count = 0;//不要忘记静态数据成员定义和初始化
+Rectangle::Rectangle()//构造函数里面都要count++，可能调用的不一样
+{
+    cout << 666 << endl;
+    this->h = 1;
+    this->w = 1;
+    count++;
+}
+Rectangle::Rectangle(int w, int h)
+{
+    cout << 666 << endl;
+    this->w = w;
+    this->h = h;
+    count++;
+}
+
+int main()
+{
+    /*Rectangle rect[3] = {Rectangle(3,4),Rectangle(7,6),Rectangle(5,6)};//创造数组，内容Rectangle 类的对象
+    int i = 0;
+    for(i = 0; i<3; i++)
+    {
+        cout << rect[i].getA() << " " << rect[i].getP() << endl;
+    }*/
+    Rectangle a(1,2);
+    Rectangle b(3,4);
+    Rectangle c;
+    Rectangle *pRectangle[3] = {&a, &b, &c};//p存放的对象地址
+    int i = 0;
+    for(i = 0; i<3; i++)
+    {
+        cout << pRectangle[i]->getA() << " " << pRectangle[i]->getP() << endl;
+    }
+    
+
+}
