@@ -1,0 +1,119 @@
+//总结：
+//1.对象数组
+//栈区的声明周期
+//2.指向对象的指针数组
+//1.有利于实现多态
+
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+using namespace std;
+
+
+class Rectangle
+{
+private:
+    int w;
+    int h;
+    static int count;//一定要定义和初始化
+public:
+    Rectangle();//无参构造函数
+    Rectangle(int w, int h);//有参构造函数
+    ~Rectangle()
+    {
+        cout << 999 << endl;
+        count--;
+    };
+
+
+    void setw(int w)//修改参数
+    {
+        this->w = w;
+    }
+    void seth(int h)
+    {
+        this->h = h;
+    }
+
+
+    int getw()//获取值
+    {
+        return w;
+    }
+    int geth()
+    {
+        return h;
+    }
+
+
+    int getA()
+    {
+        return w*h;
+    }
+    int getP()
+    {
+        return (w+h)*2;
+    }
+
+    static void getCount()
+    {
+        cout << count << endl;
+    }
+    void display()
+    {
+
+            cout << getA() << " " << getP() << endl;
+
+    }
+};
+int Rectangle::count = 0;//不要忘记静态数据成员定义和初始化
+Rectangle::Rectangle()//构造函数里面都要count++，可能调用的不一样
+{
+    cout << 666 << endl;
+    this->h = 1;
+    this->w = 1;
+    count++;
+}
+Rectangle::Rectangle(int w, int h)
+{
+    cout << 666 << endl;
+    this->w = w;
+    this->h = h;
+    count++;
+}
+
+int main()
+{
+    //对象数组
+    const int N = 3;
+    //Rectangle rect[N] = {Rectangle(3,4),Rectangle(7,6),Rectangle(5,6)};//有参
+    //Rectangle rect[N];//无参
+    //Rectangle* rect = new Rectangle[N];
+    Rectangle* rect = new Rectangle[N]{{3,4},{6,6}};//这是另一种直接初始化
+    rect[0].setw(3);//这是一种赋值方式
+    rect[0].seth(4);
+    int i = 0;
+    for(i = 0; i<N; i++)
+    {
+        rect[i].display();
+    }
+    delete[] rect;
+    //指向对象的指针数组
+    /*const int N = 3;
+    Rectangle* p[N];
+    int w, h;
+    int i = 0;
+    for(i = 0; i<N; i++)
+    {
+        cin >> w >> h;
+        //Rectangle r(w,h);//在栈区创建
+        p[i] = new Rectangle(w,h);//初始化
+        p[i]->display();
+    }
+    for(i = 0; i<N; i++)
+    {
+        delete p[i];
+    }*/
+}
